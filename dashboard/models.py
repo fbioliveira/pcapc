@@ -78,9 +78,11 @@ class Dashboard(models.Model):
     def percentual_concluidas(self):
         total_concluidas = Loja.objects.all().filter(concluida=True).count()
         total_nao_concluidas = Loja.objects.all().filter(concluida=False).count()
-        percentual_geral = ((total_concluidas/total_nao_concluidas)*100)
-        return int(percentual_geral)
-    
+        try:
+            percentual_geral = ((total_concluidas/total_nao_concluidas)*100)
+            return int(percentual_geral)
+        except:
+            return 0
     class Meta:
         verbose_name = 'Dashboard'
         verbose_name_plural = 'Dashboards'
